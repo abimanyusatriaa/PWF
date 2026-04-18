@@ -22,25 +22,34 @@
                     <div class="mb-8">
                         <label for="name" class="block text-sm font-semibold text-gray-300 mb-3">Product Name <span
                                 class="text-rose-500">*</span></label>
-                        <input type="text" name="name" id="name" value="{{ $product->name }}"
+                        <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}"
                             class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition"
                             required>
+                        @error('name')
+                            <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-2 gap-8 mb-10">
                         <div>
                             <label for="quantity" class="block text-sm font-semibold text-gray-300 mb-3">Quantity <span
                                     class="text-rose-500">*</span></label>
-                            <input type="number" name="quantity" id="quantity" value="{{ $product->quantity }}"
+                            <input type="number" name="quantity" id="quantity" value="{{ old('quantity', $product->quantity) }}"
                                 class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition"
                                 required>
+                            @error('quantity')
+                                <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="price" class="block text-sm font-semibold text-gray-300 mb-3">Price (Rp) <span
                                     class="text-rose-500">*</span></label>
-                            <input type="number" name="price" id="price" value="{{ $product->price }}"
+                            <input type="number" name="price" id="price" value="{{ old('price', $product->price) }}"
                                 class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition"
                                 required>
+                            @error('price')
+                                <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </form>

@@ -17,17 +17,26 @@
                     
                     <div class="mb-8">
                         <label for="name" class="block text-sm font-semibold text-gray-300 mb-3">Nama Produk <span class="text-rose-500">*</span></label>
-                        <input type="text" name="name" id="name" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="e.g. Wireless Headphones" required>
+                        <input type="text" name="name" id="name" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="e.g. Wireless Headphones" value="{{ old('name') }}" required>
+                        @error('name')
+                            <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-2 gap-8 mb-10">
                         <div>
                             <label for="quantity" class="block text-sm font-semibold text-gray-300 mb-3">Quantity <span class="text-rose-500">*</span></label>
-                            <input type="number" name="quantity" id="quantity" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="0" required>
+                            <input type="number" name="quantity" id="quantity" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="0" value="{{ old('quantity') }}" required>
+                            @error('quantity')
+                                <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="price" class="block text-sm font-semibold text-gray-300 mb-3">Price (Rp) <span class="text-rose-500">*</span></label>
-                            <input type="number" name="price" id="price" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="1000" required>
+                            <input type="number" name="price" id="price" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition" placeholder="1000" value="{{ old('price') }}" required>
+                            @error('price')
+                                <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 

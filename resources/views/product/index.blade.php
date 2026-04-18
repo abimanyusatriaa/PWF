@@ -6,14 +6,7 @@
                     <h2 class="text-2xl font-bold text-white tracking-wide">Product List</h2>
                     <p class="text-sm text-gray-400 mt-1">Manage your product inventory</p>
                 </div>
-                <a href="{{ route('product.create') }}"
-                    class="bg-indigo-500 hover:bg-indigo-600 shadow-lg shadow-indigo-500/30 text-white font-bold py-2.5 px-6 rounded-xl inline-flex items-center text-sm transition-all">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    Add New Product
-                </a>
+                <x-add-product url="{{ route('product.create') }}" name="Add New Product" />
             </div>
 
             <div class="bg-[#1e293b] rounded-2xl shadow-xl overflow-hidden border border-gray-700/40">
@@ -52,16 +45,20 @@
                                         {{ number_format($product->price, 0, ',', '.') }}</td>
                                     <td class="py-6 px-8 text-sm text-gray-300 font-medium">{{ $product->user->name }}</td>
                                     <td class="py-6 px-8 text-center text-gray-500">
-                                        <a href="{{ route('product.show', $product) }}"
-                                            class="hover:text-gray-300 transition inline-block">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                </path>
-                                            </svg>
-                                        </a>
+                                        <div class="flex items-center justify-center space-x-3">
+                                            <a href="{{ route('product.show', $product) }}"
+                                                class="hover:text-gray-300 transition inline-block">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <x-edit-button url="{{ route('product.edit', $product) }}" />
+                                            <x-delete-button url="{{ route('product.destroy', $product) }}" />
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
