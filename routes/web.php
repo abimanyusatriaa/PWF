@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,10 @@ Route::get('/export-product', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('product', ProductController::class);
+});
+
+Route::middleware(['auth', 'verified', 'can:manage-category'])->group(function () {
+    Route::resource('category', CategoryController::class);
 });
 
 Route::middleware('auth')->group(function () {

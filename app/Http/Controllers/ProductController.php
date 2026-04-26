@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Requests\StoreProductRequest;
@@ -23,7 +24,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+        return view('product.create', compact('categories'));
     }
 
     public function store(StoreProductRequest $request)
@@ -33,6 +35,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'quantity' => $request->quantity,
             'price' => $request->price,
+            'category_id' => $request->category_id,
             'user_id' => Auth::id(),
         ]);
 
@@ -47,7 +50,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
-        return view('product.edit', compact('product'));
+        $categories = Category::all();
+        return view('product.edit', compact('product', 'categories'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
@@ -56,7 +60,7 @@ class ProductController extends Controller
 
 
 
-        $product->update($request->only('name', 'quantity', 'price'));
+        $product->update($request->only('name', 'quantity', 'price', 'category_id'));
 
         return redirect()->route('product.show', $product)->with('success', 'Product updated successfully.');
     }

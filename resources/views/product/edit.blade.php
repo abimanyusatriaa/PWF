@@ -30,6 +30,21 @@
                         @enderror
                     </div>
 
+                    <div class="mb-8">
+                        <label for="category_id" class="block text-sm font-semibold text-gray-300 mb-3">Kategori</label>
+                        <select name="category_id" id="category_id" class="bg-[#0f172a] border border-gray-700/80 text-white text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3.5 transition">
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <p class="text-rose-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="grid grid-cols-2 gap-8 mb-10">
                         <div>
                             <label for="quantity" class="block text-sm font-semibold text-gray-300 mb-3">Quantity <span
