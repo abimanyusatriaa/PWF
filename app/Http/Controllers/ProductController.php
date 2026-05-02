@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
@@ -30,16 +28,17 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-
         Product::create([
-            'name' => $request->name,
-            'quantity' => $request->quantity,
-            'price' => $request->price,
+            'name'        => $request->name,
+            'quantity'    => $request->quantity,
+            'price'       => $request->price,
             'category_id' => $request->category_id,
-            'user_id' => Auth::id(),
+            'user_id'     => Auth::id(),
         ]);
 
-        return redirect()->route('product.index')->with('success', 'Product created successfully.');
+        return redirect()
+            ->route('product.index')
+            ->with('success', 'Product created successfully.');
     }
 
     public function show(Product $product)
@@ -50,6 +49,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
+
         $categories = Category::all();
         return view('product.edit', compact('product', 'categories'));
     }
@@ -58,17 +58,23 @@ class ProductController extends Controller
     {
         $this->authorize('update', $product);
 
+        $product->update(
+            $request->only('name', 'quantity', 'price', 'category_id')
+        );
 
-
-        $product->update($request->only('name', 'quantity', 'price', 'category_id'));
-
-        return redirect()->route('product.show', $product)->with('success', 'Product updated successfully.');
+        return redirect()
+            ->route('product.show', $product)
+            ->with('success', 'Product updated successfully.');
     }
 
     public function destroy(Product $product)
     {
         $this->authorize('delete', $product);
+
         $product->delete();
-        return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
+
+        return redirect()
+            ->route('product.index')
+            ->with('success', 'Product deleted successfully.');
     }
 }
